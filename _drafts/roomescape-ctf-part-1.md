@@ -94,6 +94,7 @@ LLM 등 분석 도구를 활용하는 환경도 기획에 반영했습니다. �
 ![방탈출 CTF 대회 단체 사진](/assets/img/room-escape-ctf/overview/00-group-photo.jpg)
 
 *그림 1. 서울시립대학교에서 진행한 방탈출 CTF 대회 단체 사진.*
+{: .text-center }
 
 각 팀은 하나의 탐정사무소입니다. 경찰 내부자로부터 전달된 메인 사건을 수사하면서, 탐정사무소에 접수된 추가 의뢰도 해결합니다. 최종적으로는 확보한 증거를 종합한 수사보고서를 제출합니다.
 
@@ -176,6 +177,7 @@ CTF 분야는 Web, Pwnable, Reversing, Crypto, Forensics, AI, Misc를 포함했�
 ![의뢰 카드로 구성한 추가 의뢰 목록](/assets/img/room-escape-ctf/overview/02-extra-cases.png)
 
 *그림 2. 참가자가 선택해서 해결하는 추가 의뢰 목록.*
+{: .text-center }
 
 <span id="field-rules"></span>
 
@@ -237,6 +239,7 @@ CTF 분야는 Web, Pwnable, Reversing, Crypto, Forensics, AI, Misc를 포함했�
 ![UOSINT의 플래그 수집 진행률](/assets/img/room-escape-ctf/overview/03-uosint.png)
 
 *그림 3. 발견한 장소 수와 획득 점수를 표시하는 UOSINT 진행 화면.*
+{: .text-center }
 
 <span id="report"></span>
 
@@ -263,6 +266,7 @@ CTF 분야는 Web, Pwnable, Reversing, Crypto, Forensics, AI, Misc를 포함했�
 ![탐정사무소 콘셉트의 대회 메인 화면](/assets/img/room-escape-ctf/overview/01-main.png)
 
 *그림 4. 대회 정보와 의뢰 진입점을 제공하는 메인 화면.*
+{: .text-center }
 
 #### 현장 지도와 시나리오 트리
 
@@ -271,12 +275,14 @@ CTF 분야는 Web, Pwnable, Reversing, Crypto, Forensics, AI, Misc를 포함했�
 ![교내 수사 공간을 표시한 현장 지도](/assets/img/room-escape-ctf/overview/04-field-map.png)
 
 *그림 5. 조사 장소와 해당 시나리오를 연결하는 현장 지도.*
+{: .text-center }
 
 시나리오 화면은 문제를 트리 형태로 배치했습니다. 개별 문제의 해결 여부와 문제 간 연결을 함께 보여 줘, 참가자가 현재 확보한 자료로 진행할 수 있는 부분을 파악하도록 했습니다. 상단에는 조사 제한 시간과 운영 중인 조사실 수를, 하단에는 퍼펙트 클리어의 조건별 달성 상태를 표시했습니다.
 
 ![시나리오의 문제 연결과 퍼펙트 클리어 조건](/assets/img/room-escape-ctf/overview/05-scenario-tree.png)
 
 *그림 6. 문제 트리와 조건별 달성 상태를 보여 주는 사이버수사대 화면.*
+{: .text-center }
 
 #### 스코어보드
 
@@ -287,6 +293,7 @@ CTF 분야는 Web, Pwnable, Reversing, Crypto, Forensics, AI, Misc를 포함했�
 ![스코어보드의 해결·힌트·부분 인증 상태 범례](/assets/img/room-escape-ctf/overview/06-scoreboard-legend.png)
 
 *그림 7. 스코어보드와 상태 범례. 총점과 문제별 진행 정보를 함께 제공합니다.*
+{: .text-center }
 
 #### 수사 기록과 새 의뢰 공지
 
@@ -295,6 +302,7 @@ CTF 분야는 Web, Pwnable, Reversing, Crypto, Forensics, AI, Misc를 포함했�
 ![시간순 공지와 의뢰 안내를 제공하는 수사 기록 화면](/assets/img/room-escape-ctf/overview/07-notices.png)
 
 *그림 8. 공지와 새 의뢰 안내를 모은 수사 기록 화면.*
+{: .text-center }
 
 <span id="operations-checklist"></span>
 
@@ -305,12 +313,14 @@ CTF 분야는 Web, Pwnable, Reversing, Crypto, Forensics, AI, Misc를 포함했�
 ![본진에서 참가자에게 Discord 티켓 이용 방법을 설명하는 OT 현장](/assets/img/room-escape-ctf/overview/13-participant-ot.jpg)
 
 *그림 9. 참가자 OT에서 Discord 티켓 이용 방법을 안내하는 모습.*
+{: .text-center }
 
 팀원 간의 온라인 소통에는 Discord 팀 전용 채널을 사용했습니다. 참가자가 `#verify` 채널에서 대회 계정의 인증 토큰으로 인증하면 팀 채널이 생성되고, 해당 팀의 참가자 3명과 운영진에게만 접근 권한을 부여하는 방식입니다. 단서와 풀이 내용은 이 채널 안에서 공유하도록 안내했습니다.
 
 ![시립대부 팀 전용 Discord 채널 목록](/assets/img/room-escape-ctf/overview/14-team-channels-uos.png)
 
 *그림 10. 시립대부 팀 전용 Discord 채널 목록.*
+{: .text-center }
 
 공지와 문의, 힌트도 이용 경로를 구분했습니다. 전체 공지는 Discord와 대회 사이트에서 확인하고, 운영 문의나 문제 이용 범위가 불분명한 경우에는 Discord 티켓을 사용하도록 했습니다. 풀이 힌트는 지정된 대회 사이트에서 열람하며 감점이 적용됩니다. 운영 문의를 보내는 것과 점수를 사용해 힌트를 여는 것을 참가자가 구분할 수 있도록 안내했습니다.
 
@@ -344,6 +354,7 @@ OT에서는 복도에서 뛰지 않기, 출입구를 막지 않기, 소품과 �
 ![CTFd Access Token을 사용하는 큐 로그인 화면](/assets/img/room-escape-ctf/overview/09-queue-login.png)
 
 *그림 12. 대회 계정의 인증 정보를 이용해 소속 팀을 확인하는 로그인 화면.*
+{: .text-center }
 
 등록은 현장 QR 코드를 스캔하고 확인 화면에서 완료하는 순서입니다. 가이드에는 QR 코드를 읽은 뒤 실제 등록 결과까지 확인하도록 안내했습니다. 카메라를 사용할 수 없는 환경에 대해서는 QR 코드 이미지 선택이나 수동 입력 경로도 안내했습니다.
 
@@ -362,12 +373,14 @@ OT에서는 복도에서 뛰지 않기, 출입구를 막지 않기, 소품과 �
 ![두 조사실과 공용 대기열을 관리하는 운영 콘솔](/assets/img/room-escape-ctf/overview/10-queue-admin.png)
 
 *그림 13. 수사자료실의 두 조사실을 개별 관리하고 다음 대기 팀을 확인하는 운영 콘솔.*
+{: .text-center }
 
 예를 들어 A팀과 B팀이 각각 조사 중이고 C팀, D팀 순서로 기다린다면, A팀이 끝난 방에는 C팀이 배정됩니다. B팀의 조사는 그대로 진행됩니다. 이후 C팀이 입장하고 B팀도 조사를 마치면, B팀이 사용하던 방에는 D팀이 배정됩니다.
 
 ![두 조사실에서 A팀에서 C팀으로, B팀에서 D팀으로 이어지는 팀 배정 흐름](/assets/img/room-escape-ctf/overview/12-parallel-rooms.png)
 
 *그림 14. 공용 대기열을 공유하는 두 조사실의 운영 흐름. (막대 길이는 실제 소요 시간을 나타내지 않습니다.)*
+{: .text-center }
 
 이 방식에서는 방별로 별도의 줄을 관리하거나 참가자에게 어느 줄이 더 빠른지 선택하게 할 필요가 없습니다. 운영진은 해당 시나리오의 대기 순서를 기준으로 입장을 안내하고, 참가자는 자신에게 배정된 조사실을 확인합니다.
 
