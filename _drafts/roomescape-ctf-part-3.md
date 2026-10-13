@@ -1,6 +1,6 @@
 ---
 title: "방탈출 CTF 운영기 3편: 추가 의뢰"
-description: "방탈출 CTF의 추가 의뢰 9개를 독립형 문제로 구성한 배경과 문제별 분석 원리, 재현 가능한 풀이를 소개합니다."
+description: "방탈출 CTF의 추가 의뢰 9개를 독립형 문제로 구성한 배경과 문제별 분석 원리, 의뢰 결과 보고서의 검수 기준을 소개합니다."
 author: roomescape_ctf_pending
 # 작성자와 게시일은 미정입니다. 확정 후 _posts로 이동합니다.
 tags: [ctf-writeup, roomescape, web, pwn, binary-analysis]
@@ -28,7 +28,7 @@ image: # 게시용 가로 썸네일 미정
    7. [고양이는 자고 있었는데 참치는 누가 먹었죠?](#27-고양이는-자고-있었는데-참치는-누가-먹었죠)
    8. [키는 사라졌지만, 흔적은 남아 있을까요?](#28-키는-사라졌지만-흔적은-남아-있을까요)
    9. [나를 쫓아낸 회사의 진짜 복구 기록을 가져오세요](#29-나를-쫓아낸-회사의-진짜-복구-기록을-가져오세요)
-3. [마치며](#3-마치며)
+3. [의뢰 검수](#3-의뢰-검수)
 
 ## 1. 추가 의뢰
 
@@ -56,9 +56,6 @@ image: # 게시용 가로 썸네일 미정
 정적 파일만 분석하는 문제와 원격 서비스의 상태를 변화시키는 문제를 함께 배치했습니다. 팀별 진행 상태가 필요한 서비스는 대회 플랫폼의 개인 계정에서 발급한 Access Token으로 소속 팀을 확인해 세션, 요청 예산과 중간 상태를 분리했습니다. 같은 팀의 팀원은 하나의 진행 기록을 공유하되 다른 팀의 측정값이나 풀이 상태에는 접근할 수 없도록 구성했습니다.
 
 ![대회 플랫폼의 추가 의뢰 목록](/assets/img/room-escape-ctf/extra-requests/ctfd-additional-requests-list.png)
-
-*그림 1. 대회 플랫폼에서 제공한 추가 의뢰 목록.*
-{: .text-center }
 
 | 의뢰 제목 | 분야 | 난이도 |
 |---|---|---|
@@ -90,10 +87,7 @@ image: # 게시용 가로 썸네일 미정
 | 목표 | last-owner race를 이용해 루트 권한 또는 approval HMAC 키 획득 |
 | 플래그 | `SHA{9a73f71c816d7bae202fd5a6c175ace1}` |
 
-![대회 플랫폼의 000번 보관함 승인서 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-reclaim-challenge.png)
-
-*그림 2. 000번 보관함의 승인서 의뢰 화면.*
-{: .text-center }
+![대회 플랫폼의 RE:CLAIM 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-reclaim-challenge.png)
 
 의뢰인은 정산 분쟁으로 폐기 대상이 된 000번 보관함에서 승인서 원본을 꺼내기 위해, 서버에 남아 있는 비밀키를 회수해 달라고 요청합니다. 참가자는 uid 1000 BusyBox 환경에서 다음 세 장치를 조사합니다.
 
@@ -187,18 +181,11 @@ response = HMAC-SHA256(recovered_signing_key, nonce)
 
 풀이 2의 익스플로잇은 정상 snapshot 미끼, 한쪽 변조만 성공한 상태, 서로 다른 fingerprint의 교차 결합과 잘못된 HMAC 키가 모두 거부되는지 확인합니다. 같은 fingerprint의 두 변조가 결합된 경우에만 `MAC:SHA{...}`가 출력됩니다.
 
-#### 6. 재현 경로
+#### 6. 출제 의도와 운영 결과
 
-이 의뢰는 루트 사용자만 접근할 수 있는 보관함에서 승인서를 회수하는 Linux Kernel 문제입니다. 풀이 1에서는 객체 수명과 소유권 경쟁, SLUB page 회수와 pipe page 재할당을 거쳐 루트 권한을 얻습니다. 풀이 2에서는 같은 출발점에서 archive의 ordering과 redaction 상태를 각각 조작해 32바이트 비밀키를 복구합니다. 하나의 경쟁 상태를 권한 상승과 정상 approval gate 통과라는 서로 다른 관점으로 확장한 것이 문제의 핵심입니다.
+RE:CLAIM은 루트 사용자만 접근할 수 있는 보관함에서 플래그를 회수하는 Linux Kernel 문제로 설계했습니다. 풀이 1에서는 객체 수명과 소유권 경쟁, SLUB page 회수와 pipe page 재할당을 거쳐 루트 권한을 얻습니다. 풀이 2에서는 같은 출발점에서 archive의 ordering과 redaction 상태를 각각 조작해 32바이트 비밀키를 복구합니다. 하나의 경쟁 상태를 권한 상승과 정상 approval gate 통과라는 서로 다른 관점으로 확장한 것이 문제의 핵심입니다.
 
-공식 익스플로잇은 race 재시도, slab page 회수, pipe page 재할당과 payload 배치를 모두 포함하므로 C 코드가 길어집니다. 실행 경로는 아래와 같습니다. 같은 VM 세션 안에서 익스플로잇을 마쳐야 한다는 점이 핵심입니다.
-
-```bash
-make -C for_admin/solution
-python3 for_admin/solution/solve_remote.py \
-  --host <host> --port 31337 --server-name <server-name> \
-  --exploit for_admin/solution/exploit
-```
+대회에서는 전체 참가 팀 가운데 네 팀이 해결했습니다. 커널 객체 수명, allocator 상태와 두 독립 consumer의 결합까지 분석해야 했던 만큼 상위권을 구분하는 고난도 의뢰의 역할을 했습니다.
 
 ```text
 SHA{9a73f71c816d7bae202fd5a6c175ace1}
@@ -216,17 +203,11 @@ SHA{9a73f71c816d7bae202fd5a6c175ace1}
 | 목표 | 동일한 제보를 독립된 봇 기록처럼 공증하여 공식 보존 기록 발행 |
 | 플래그 | `SHA{n0b0dy_s41d_1t_but_3v3ry_b0t_r3m3mb3rs}` |
 
-![대회 플랫폼의 소문 출처 추적 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-botficial-challenge.png)
+![대회 플랫폼의 BOTFICIAL 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-botficial-challenge.png)
 
-*그림 3. 소문의 출처를 찾는 의뢰 화면.*
-{: .text-center }
+BOTFICIAL은 여러 봇이 반복해서 인용한 소문을 공식 기록으로 만드는 문제입니다. 서비스의 공증 봇은 전체 인용 계보를 추적하지 않고 마지막 단계의 직접 작성자만 비교합니다. 하나의 제보를 서로 다른 봇이 재진술하게 만들면 동일한 출처에서 시작한 기록을 독립된 증언처럼 보이게 할 수 있습니다.
 
-이 의뢰는 여러 봇이 반복해서 인용한 소문을 공식 기록으로 만드는 문제입니다. 서비스의 공증 봇은 전체 인용 계보를 추적하지 않고 마지막 단계의 직접 작성자만 비교합니다. 하나의 제보를 서로 다른 봇이 재진술하게 만들면 동일한 출처에서 시작한 기록을 독립된 증언처럼 보이게 할 수 있습니다.
-
-![로컬에서 실행한 봇 기록 피드 화면](/assets/img/room-escape-ctf/extra-requests/botficial-local-feed.png)
-
-*그림 4. 로컬에서 재현한 봇 기록 피드.*
-{: .text-center }
+![로컬에서 실행한 BOTFICIAL 피드 화면](/assets/img/room-escape-ctf/extra-requests/botficial-local-feed.png)
 
 #### 1. 봇의 기억 내보내기
 
@@ -261,31 +242,13 @@ MBK4 header
 
 공식 풀이에서는 정확히 16개의 댓글을 사용합니다. 단일 합류만 만들면 공증 조건을 만족하지 못하며, 별도의 교차 검증선과 `MIRROR`를 포함한 2단 봉인이 모두 필요합니다. 댓글 횟수가 제한되어 있으므로 메모리 파일을 분석하지 않고 가능한 봇 순서를 전수 대입하는 방식은 사용할 수 없습니다.
 
-![공증 조건을 충족해 공식 보존 기록이 발행된 화면](/assets/img/room-escape-ctf/extra-requests/botficial-local-notary-result.png)
-
-*그림 5. 공증 조건을 충족해 공식 보존 기록이 발행된 결과.*
-{: .text-center }
+![공증 조건을 충족해 공식 보존 기록이 발행된 BOTFICIAL 화면](/assets/img/room-escape-ctf/extra-requests/botficial-local-notary-result.png)
 
 핵심은 삭제된 원문을 찾는 것이 아니라, 참가자의 최초 제보가 여러 봇을 거치면서 출처가 분리된 것처럼 보이도록 만드는 데 있습니다. 외부 LLM API 대신 결정론적인 로컬 의미 판정을 사용해 같은 입력에는 항상 같은 결과가 나오도록 했습니다.
 
 ```text
 SHA{n0b0dy_s41d_1t_but_3v3ry_b0t_r3m3mb3rs}
 ```
-
-#### 4. 재현 코드
-
-공식 솔버는 메모리 내보내기를 분석해 댓글 순서를 복구한 뒤, 하나의 팀 토큰으로 순서대로 제출합니다.
-
-```python
-state = get_json("/api/state", token)
-rows = parse_mbk(get_bytes("/api/memory-export", token), state["seed"])
-route = recover_route(rows, state["epoch"])
-for bot, action, text in route:
-    submit(bot, action, text, token)
-print(get_json("/api/notary", token)["flag"])
-```
-
-전체 코드는 [공개 저장소의 공식 솔버](https://github.com/GEONWOOHAN/room_escape_ctf/tree/main/sub_scene/ai_gunwoo_botficial/for_admin/solution)에서 확인할 수 있습니다.
 
 ### 2.3 폐기하기 전에 보관소부터 열어 주십시오
 
@@ -299,12 +262,9 @@ print(get_json("/api/notary", token)["flag"])
 | 목표 | 세 번의 암호문 이식으로 maintenance·UID·vault capability 복구 |
 | 플래그 | `SHA{transpl4nted_c1ph3rt3xt}` |
 
-![대회 플랫폼의 보안 프로세서 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-donor-challenge.png)
+![대회 플랫폼의 DONOR 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-donor-challenge.png)
 
-*그림 6. 폐기 예정 보안 프로세서 의뢰 화면.*
-{: .text-center }
-
-이 의뢰는 폐기 예정 보안 프로세서의 암호화 메모리에서 보관소 권한을 복구하는 문제입니다. 프로세서는 64개의 16바이트 블록을 XEX 형태로 암호화하지만, 위치별 tweak를 계산할 때 다음 4비트 값만 사용합니다.
+DONOR는 폐기 예정 보안 프로세서의 암호화 메모리에서 보관소 권한을 복구하는 문제입니다. 프로세서는 64개의 16바이트 블록을 XEX 형태로 암호화하지만, 위치별 tweak를 계산할 때 다음 4비트 값만 사용합니다.
 
 ```text
 delta_j = AES_K(N) * alpha^j
@@ -348,20 +308,6 @@ connect → recover epoch → sheath
 SHA{transpl4nted_c1ph3rt3xt}
 ```
 
-#### 3. 재현 코드
-
-```python
-epoch = recover_epoch(banner)
-blocks = command(sock, "sheath")
-move(sock, blocks, maintenance_donor(epoch), maintenance_target(epoch))
-route = recover_route(command(sock, "diagnose"))
-move(sock, blocks, uid_donor(epoch, route), uid_target(epoch, route))
-move(sock, blocks, cap_donor(epoch, route), cap_target(epoch, route))
-print(command(sock, "attest"))
-```
-
-세 번의 이식은 동일한 연결에서 수행해야 합니다. 전체 코드는 [공개 저장소의 공식 솔버](https://github.com/GEONWOOHAN/room_escape_ctf/tree/main/sub_scene/crypto_gunwoo_donor/for_admin/solution)에서 확인할 수 있습니다.
-
 ### 2.4 폐기 단말에 남은 실행 기록을 복구해 주세요
 
 | 항목 | 내용 |
@@ -374,10 +320,7 @@ print(command(sock, "attest"))
 | 목표 | 제한된 14개 패치로 28단계 힙 실행 체인 복구 |
 | 플래그 | `SHA{cross_backend_pcode_refinement_requires_real_execution}` |
 
-![대회 플랫폼의 폐기 단말 실행 기록 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-no-stack-still-turing-challenge.png)
-
-*그림 7. 폐기 단말 실행 기록 복구 의뢰 화면.*
-{: .text-center }
+![대회 플랫폼의 No Stack, Still Turing 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-no-stack-still-turing-challenge.png)
 
 이 문제에는 스택 오버플로도 임의 주소 쓰기도 없습니다. 참가자가 수정할 수 있는 대상은 힙의 dispatch node와 함수 ID이며, 패치는 `ABS32` 두 개와 `HEAP32` 열두 개로 제한됩니다.
 
@@ -409,18 +352,6 @@ print(command(sock, "attest"))
 SHA{cross_backend_pcode_refinement_requires_real_execution}
 ```
 
-#### 4. 재현 코드
-
-```python
-REPLACEMENTS = ((0x0270, 221), (0x0D80, 174), (0x0F20, 201),
-                (0x0970, 355), (0x0E50, 29), (0x0830, 207))
-payload = build_patch_records(chain, REPLACEMENTS)
-receipt = run_checker(payload)
-assert receipt["accepted"]
-```
-
-전체 코드는 [공개 저장소의 공식 솔버](https://github.com/GEONWOOHAN/room_escape_ctf/tree/main/sub_scene/pwn_no-stack-still-turing/for_admin/solution)에서 확인할 수 있습니다.
-
 ### 2.5 응답 없는 센서 세 대를 다시 연결해 주세요
 
 | 항목 | 내용 |
@@ -433,12 +364,9 @@ assert receipt["accepted"]
 | 목표 | 업데이트 경계를 우회하고 세 장치의 콜백 체인 복구 |
 | 플래그 | `SHA{one_semantic_policy_wakes_the_entire_ghost_fleet}` |
 
-![대회 플랫폼의 센서 콜백 복구 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-ghost-callback-challenge.png)
+![대회 플랫폼의 Ghost Callback 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-ghost-callback-challenge.png)
 
-*그림 8. 응답 없는 센서의 콜백 복구 의뢰 화면.*
-{: .text-center }
-
-이 의뢰는 서명된 업데이트 패키지로 세 ARM Thumb 센서의 calibration 파일을 바꾸고, 펌웨어에 숨겨진 콜백 체인을 복구하는 문제입니다.
+Ghost Callback은 서명된 업데이트 패키지로 세 ARM Thumb 센서의 calibration 파일을 바꾸고, 펌웨어에 숨겨진 콜백 체인을 복구하는 문제입니다.
 
 업데이트 검증기는 원본 경로에서 일반적인 `..` 패턴을 차단하지만, extractor는 퍼센트 디코딩과 NFKC 정규화를 거친 경로를 사용합니다. 퍼센트 인코딩된 전각 마침표는 검증 단계에서는 안전한 하위 경로로 보이지만, 정규화 이후 부모 경로가 되어 calibration 파일을 덮어쓸 수 있습니다.
 
@@ -480,16 +408,6 @@ b' = ROR32(b xor term1, rot1) + a'
 SHA{one_semantic_policy_wakes_the_entire_ghost_fleet}
 ```
 
-#### 5. 재현 코드
-
-공식 솔버는 세 펌웨어의 콜백을 에뮬레이션해 경로를 역산하고, 검증된 calibration과 이벤트를 다시 구성합니다.
-
-```bash
-python3 for_admin/solution/solver/solve.py
-```
-
-전체 코드는 [공개 저장소의 공식 솔버](https://github.com/GEONWOOHAN/room_escape_ctf/tree/main/sub_scene/rev_ghost-callback/for_admin/solution)에서 확인할 수 있습니다.
-
 ### 2.6 금고가 열린 순간의 영상을 찾아 주세요
 
 | 항목 | 내용 |
@@ -502,12 +420,9 @@ python3 for_admin/solution/solver/solve.py
 | 목표 | `reference`에서는 실패하고 세 최적화 프로필에서 성공하는 `candidate.pbc` 제작 |
 | 플래그 | `SHA{phantom_frames_survive_optimization}` |
 
-![대회 플랫폼의 금고 영상 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-phantom-frame-challenge.png)
+![대회 플랫폼의 Phantom Frame 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-phantom-frame-challenge.png)
 
-*그림 9. 금고 영상 복구 의뢰 화면.*
-{: .text-center }
-
-이 의뢰는 하나의 `candidate.pbc`가 `reference` 실행에서는 실패하고 alpha·beta·gamma 최적화 프로필에서는 모두 성공하도록 만드는 VM 리버싱 문제입니다.
+Phantom Frame은 하나의 `candidate.pbc`가 `reference` 실행에서는 실패하고 alpha·beta·gamma 최적화 프로필에서는 모두 성공하도록 만드는 VM 리버싱 문제입니다.
 
 #### 1. PPBC 형식과 opcode 복구
 
@@ -562,16 +477,6 @@ HKDF-SHA256(
 SHA{phantom_frames_survive_optimization}
 ```
 
-#### 4. 재현 코드
-
-```python
-build_candidate()                    # candidate.pbc 구성
-run([str(USER / "checker")], cwd=USER, check=True)
-run([str(USER / "unwrap")], cwd=USER, check=True)
-```
-
-checker가 `reference` 실패와 세 최적화 프로필의 성공 transcript를 함께 검증한 뒤에만 `unwrap`이 플래그를 복호화합니다. 전체 코드는 [공개 저장소의 공식 솔버](https://github.com/GEONWOOHAN/room_escape_ctf/tree/main/sub_scene/rev_phantom-frame/for_admin/solution)에서 확인할 수 있습니다.
-
 ### 2.7 고양이는 자고 있었는데 참치는 누가 먹었죠?
 
 | 항목 | 내용 |
@@ -585,17 +490,11 @@ checker가 `reference` 실패와 세 최적화 프로필의 성공 transcript를
 | 목표 | 로그인 SQL Injection으로 운영자 전용 사건 정보 확인 |
 | 플래그 | `SHA{wh0_ate_the_tuna_at_0404}` |
 
-![대회 플랫폼의 급식기 사건 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-meowpass-challenge.png)
+![대회 플랫폼의 MEOWPASS 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-meowpass-challenge.png)
 
-*그림 10. 스마트 급식기 사건 의뢰 화면.*
-{: .text-center }
+MEOWPASS는 스마트 급식기의 새벽 이벤트를 조사하는 화이트박스 입문용 웹 문제입니다. 의뢰인은 닷새째 새벽 4시 04분마다 참치가 사라지고 있지만 자신의 고양이 나비는 당시 침대에서 자고 있었다고 설명합니다. 급식기에는 등록하지 않은 목걸이 태그 `MP-C7:04:04`가 남아 있습니다.
 
-이 의뢰는 스마트 급식기의 새벽 이벤트를 조사하는 화이트박스 입문용 웹 문제입니다. 의뢰인은 닷새째 새벽 4시 04분마다 참치가 사라지고 있지만 자신의 고양이 나비는 당시 침대에서 자고 있었다고 설명합니다. 급식기에는 등록하지 않은 목걸이 태그 `MP-C7:04:04`가 남아 있습니다.
-
-![로컬에서 실행한 급식기 로그인 화면](/assets/img/room-escape-ctf/extra-requests/meowpass-local-login.png)
-
-*그림 11. 로컬에서 재현한 급식기 로그인 화면.*
-{: .text-center }
+![로컬에서 실행한 MEOWPASS 로그인 화면](/assets/img/room-escape-ctf/extra-requests/meowpass-local-login.png)
 
 참가자에게는 의뢰문과 함께 운영 서비스와 동일한 취약점·화면 로직을 가진 `app.py`를 제공합니다. 공개 소스의 플래그만 `SHA{local_dummy_flag}`로 치환하고 템플릿, 정적 리소스, 운영 환경변수와 실제 플래그는 제외했습니다. 따라서 참가자는 무작위 대입이 아니라 제공된 소스를 읽어 의도한 취약점을 찾을 수 있습니다.
 
@@ -603,10 +502,7 @@ checker가 `reference` 실패와 세 최적화 프로필의 성공 transcript를
 
 게스트 계정은 사건 번호와 급식 이벤트까지 확인할 수 있지만 보호자와 반려동물 필드는 숨겨집니다. 참가자는 이 화면에서 조사할 사건이 `#404`이며, 다음 단계가 운영자 권한 획득임을 알 수 있습니다.
 
-![게스트 계정에서 보호자 정보가 가려진 사건 화면](/assets/img/room-escape-ctf/extra-requests/meowpass-local-guest-event.png)
-
-*그림 12. 게스트 계정에서 확인한 제한된 사건 정보.*
-{: .text-center }
+![게스트 계정에서 보호자 정보가 가려진 MEOWPASS 사건 화면](/assets/img/room-escape-ctf/extra-requests/meowpass-local-guest-event.png)
 
 ```text
 로그인 계정 : guest / guest
@@ -649,10 +545,7 @@ password: x
 
 운영자 세션으로 이벤트 `#404`를 다시 열면 고양이 이름 `건공이`, 보호자 계정과 사건 원인을 확인할 수 있습니다. 인접 세대의 태그가 공유 급식 그룹에 잘못 연결된 것이 원인이었습니다.
 
-![SQL Injection 성공 후 확인한 사건 화면](/assets/img/room-escape-ctf/extra-requests/meowpass-local-admin-event.png)
-
-*그림 13. 운영자 권한으로 다시 확인한 사건 정보.*
-{: .text-center }
+![SQL Injection 성공 후 확인한 MEOWPASS 사건 화면](/assets/img/room-escape-ctf/extra-requests/meowpass-local-admin-event.png)
 
 #### 3. 사건 확인 코드 제출
 
@@ -668,21 +561,12 @@ password: x
 
 #### 4. 출제 의도
 
-이 의뢰는 추가 의뢰를 한 문제도 시작하지 못하는 팀이 생기지 않도록 배치한 초급 SQL Injection 문제입니다. 소스에서 취약한 쿼리를 찾고 직접 입력을 구성하면 짧은 과정으로 해결할 수 있게 했으며, 처음 Web 문제를 접한 참가자도 화이트박스 분석과 권한 우회의 기본 흐름을 경험하도록 구성했습니다.
+MEOWPASS는 추가 의뢰를 한 문제도 시작하지 못하는 팀이 생기지 않도록 배치한 초급 SQL Injection 문제입니다. 소스에서 취약한 쿼리를 찾고 직접 입력을 구성하면 짧은 과정으로 해결할 수 있게 했으며, 처음 Web 문제를 접한 참가자도 화이트박스 분석과 권한 우회의 기본 흐름을 경험하도록 구성했습니다.
 
 기술 구조는 단순하지만 대회의 의뢰 형식에 맞게 스마트 급식기, 새벽 4시 04분의 이벤트와 사라진 참치를 하나의 사건으로 연결하는 과정이 필요했습니다. 쉬운 문제도 정답 입력만 남겨 두지 않고 대회 전체의 탐정사무소 콘셉트 안에서 자연스럽게 읽히도록 구성했습니다.
 
 ```text
 SHA{wh0_ate_the_tuna_at_0404}
-```
-
-#### 5. 재현 코드
-
-```python
-data = urllib.parse.urlencode({"username": "admin' -- ", "password": "x"}).encode()
-opener.open(f"{base_url}/login", data, timeout=5).read()
-page = opener.open(f"{base_url}/events/404", timeout=5).read()
-print(re.search(rb"SHA\{[A-Za-z0-9_!?.:-]+\}", page).group().decode())
 ```
 
 ### 2.8 키는 사라졌지만, 흔적은 남아 있을까요?
@@ -697,12 +581,9 @@ print(re.search(rb"SHA\{[A-Za-z0-9_!?.:-]+\}", page).group().decode())
 | 목표 | 소거된 타원곡선 스칼라의 흔적을 복구해 삭제 PDF 복원 |
 | 플래그 | `SHA{wh3n_k3ys_v4n1sh_m3m0ry_r3m3mb3rs}` |
 
-![대회 플랫폼의 삭제 기록 복구 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-keypsake-challenge.png)
+![대회 플랫폼의 KEYPSAKE 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-keypsake-challenge.png)
 
-*그림 14. 삭제 기록 복구 의뢰 화면.*
-{: .text-center }
-
-이 의뢰는 실행 중인 서비스의 MiniDump와 암호화된 백업 볼륨을 연결해 삭제된 문서를 복구하는 정적 포렌식 문제입니다. 참가자에게는 telemetry provider DLL, 압축된 메모리 덤프와 암호화 볼륨을 제공합니다.
+KEYPSAKE는 실행 중인 서비스의 MiniDump와 암호화된 백업 볼륨을 연결해 삭제된 문서를 복구하는 정적 포렌식 문제입니다. 참가자에게는 telemetry provider DLL, 압축된 메모리 덤프와 암호화 볼륨을 제공합니다.
 
 ```text
 telemetry_provider.dll
@@ -745,16 +626,6 @@ Q - known*G = left*G + right*G
 SHA{wh3n_k3ys_v4n1sh_m3m0ry_r3m3mb3rs}
 ```
 
-#### 5. 재현 코드
-
-공식 솔버는 볼륨 푸터와 덤프의 무결성 검사를 먼저 통과시킨 뒤, 두 잔여값 체인에서 wNAF digit을 복구하고 EC meet-in-the-middle을 수행합니다.
-
-```bash
-python3 for_admin/solution/solve.py
-```
-
-전체 코드는 [공개 저장소의 공식 솔버](https://github.com/GEONWOOHAN/room_escape_ctf/tree/main/sub_scene/misc_gunwoo_keypsake/for_admin/solution)에서 확인할 수 있습니다.
-
 ### 2.9 나를 쫓아낸 회사의 진짜 복구 기록을 가져오세요
 
 | 항목 | 내용 |
@@ -767,12 +638,9 @@ python3 for_admin/solution/solve.py
 | 목표 | 압축 후 버킷 크기만 보이는 백업에서 실제 `recovery` 레코드 복구 |
 | 플래그 | `SHA{a1b2c3d4e5f6-90d2}` |
 
-![대회 플랫폼의 전자 금고 복구 기록 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-vault-boundary-challenge.png)
+![대회 플랫폼의 Vault Boundary 의뢰 화면](/assets/img/room-escape-ctf/extra-requests/ctfd-vault-boundary-challenge.png)
 
-*그림 15. 전자 금고 복구 기록 의뢰 화면.*
-{: .text-center }
-
-이 의뢰는 손님 계정의 공유 메모를 관리자 백업에 섞어 넣고, 압축된 결과의 길이만 관찰해 실제 `recovery` 레코드를 복구하는 길이 오라클 문제입니다.
+Vault Boundary는 손님 계정의 공유 메모를 관리자 백업에 섞어 넣고, 압축된 결과의 길이만 관찰해 실제 `recovery` 레코드를 복구하는 길이 오라클 문제입니다.
 
 백업 본문은 압축 후 AES-GCM으로 암호화되며 참가자에게는 16바이트 버킷 단위의 크기만 보입니다. 레코드 배치와 패딩 순서는 요청 카운터, 스타일, 팀과 epoch에 따라 바뀌고 여러 미끼 레코드도 함께 존재합니다.
 
@@ -817,22 +685,34 @@ CRC16-CCITT   : 90d2
 SHA{a1b2c3d4e5f6-90d2}
 ```
 
-#### 5. 재현 코드
+## 3. 의뢰 검수
 
-```python
-def measure_candidate(prefix, candidate):
-    probe = "recovery=" + prefix + candidate
-    return sum(measure_one_balanced_epoch(probe))
+메인 의뢰는 사건 전체에 대한 최종 수사보고서를 제출받았습니다. 추가 의뢰는 문제별 풀이 과정과 근거를 작성한 라이트업을 각각의 의뢰 결과 보고서로 제출받았습니다. 운영진은 대회 플랫폼의 플래그 제출 기록과 이 보고서를 함께 검토해 최종 점수를 반영했습니다.
 
-for candidate in alphabet:
-    score[candidate] = measure_candidate(prefix, candidate)
-prefix += min(score, key=score.get)
-```
+### 3.1 플래그 및 의뢰 결과 보고서 제출
 
-전체 코드는 [공개 저장소의 공식 솔버](https://github.com/GEONWOOHAN/room_escape_ctf/tree/main/sub_scene/web_vault-boundary/for_admin/solution)에서 확인할 수 있습니다.
+참가자는 문제에서 얻은 `SHA{...}` 형식의 플래그를 팀 계정으로 대회 플랫폼에 제출했습니다. 플랫폼 기록으로 정답 여부와 해결 시각을 확인하고, 라이트업으로 실제 풀이 과정과 근거를 확인했습니다.
 
-## 3. 마치며
+라이트업에는 분석에 사용한 자료, 핵심 단서, 취약점 또는 복구 원리, 주요 명령과 코드, 플래그를 얻은 과정이 포함되어야 했습니다. 모든 시행착오를 기록할 필요는 없지만, 제공 자료에서 정답에 도달하는 핵심 과정은 재현할 수 있어야 했습니다.
 
-추가 의뢰는 현장 조사가 진행되는 동안에도 별도의 분석 공간에서 이어갈 수 있는 독립 과제로 구성했습니다. 간단한 소스 분석으로 시작할 수 있는 웹 의뢰부터 커널 객체 수명, 가상 머신 최적화, 암호화된 저장소 복구까지 분석 대상과 접근 방식을 넓게 배치했습니다.
+### 3.2 의뢰 결과 검수 기준
 
-각 의뢰의 서사는 조사할 대상과 결과물을 분명히 안내하는 역할을 맡았고, 실제 풀이는 제공 파일과 서비스의 동작을 분석해 증거를 쌓는 과정으로 구성했습니다. 이 글에 정리한 풀이와 재현 코드는 같은 유형의 CTF 문제를 설계하거나 분석할 때 참고할 수 있는 기록으로 남기고자 합니다.
+운영진은 공식 풀이와 제출된 라이트업을 대조해 다음 항목을 확인했습니다.
+
+| 검수 항목 | 확인 내용 |
+|---|---|
+| 의뢰 목표 | 의뢰인이 요구한 결과와 실제 문제의 목표를 정확히 파악했는지 |
+| 분석 근거 | 바이너리, 패킷, 메모리, 소스 코드 또는 서버 응답에서 결론을 뒷받침하는 증거를 제시했는지 |
+| 기술적 정확성 | 취약점의 발생 조건과 암호·VM·파일 구조, 공격 또는 복구 원리를 정확히 설명했는지 |
+| 재현 가능성 | 핵심 명령, 코드, 입력값과 중간 결과가 남아 있어 같은 제공 자료로 풀이를 재현할 수 있는지 |
+| 결과 도출 | 분석 과정에서 플래그가 실제로 도출되며, 단순 추측이나 정답 문자열 기재에 그치지 않았는지 |
+
+플래그만 기재하거나 핵심 분석 과정이 빠진 보고서는 풀이 근거를 확인할 수 없으므로 완전한 의뢰 결과로 인정하지 않았습니다.
+
+### 3.3 공식 풀이와 다른 접근
+
+공식 풀이와 다른 방법을 사용했더라도 기술적으로 타당하고 같은 환경에서 재현할 수 있다면 유효한 풀이로 인정했습니다. 의도하지 않은 취약점을 사용한 경우에는 제공 자료와 운영 서비스만으로 공격 경로가 성립하는지, 우연한 서버 상태나 다른 팀의 데이터에 의존하지 않는지를 추가로 확인했습니다.
+
+### 3.4 수동 채점 및 최종 점수
+
+대회 플랫폼의 제출 기록과 라이트업의 풀이 근거가 모두 확인된 문제는 해당 팀의 해결 문제로 인정했습니다. 설명이 부족한 경우에는 함께 제출된 코드와 중간 산출물을 추가로 대조했습니다. 검수가 끝난 뒤 인정된 문제와 보고서 평가 결과를 바탕으로 운영진이 팀별 최종 점수를 수동으로 확정했습니다.
