@@ -1,8 +1,8 @@
 ---
 title: "방탈출 CTF 운영기 3편: 추가 의뢰"
 description: "방탈출 CTF의 추가 의뢰 9개를 독립형 문제로 구성한 배경과 문제별 분석 원리, 재현 가능한 풀이를 소개합니다."
-author: roomescape_ctf_pending
-# 작성자와 게시일은 미정입니다. 확정 후 _posts로 이동합니다.
+author: 한건우
+# 게시일 확정 후 _posts로 이동합니다.
 tags: [Tech, CTF, roomescape]
 categories: [Tech, CTF]
 comments: false
@@ -10,7 +10,7 @@ math: false
 mermaid: false
 pin: false
 toc: false
-image: # 게시용 가로 썸네일 미정
+image: /assets/img/room-escape-ctf/extra-requests/ctfd-additional-requests-list.png
 ---
 
 ## 목차
