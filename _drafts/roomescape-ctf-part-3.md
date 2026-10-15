@@ -4055,7 +4055,7 @@ def handout_dir() -> Path:
 def load_public_schema() -> dict[str, object]:
     data = (handout_dir() / "schema.wasm").read_bytes()
     if len(data) < 8 or data[:8] != b"\x00asm\x01\x00\x00\x00":
-        raise RuntimeError("올바른 WebAssembly 모듈이 아닙니다.")
+        raise RuntimeError("Invalid WebAssembly module")
     offset = 8
 
     def decode_u32(start: int) -> tuple[int, int]:
@@ -4063,7 +4063,7 @@ def load_public_schema() -> dict[str, object]:
         shift = 0
         while True:
             if start >= len(data) or shift >= 35:
-                raise RuntimeError("잘못된 WebAssembly LEB128입니다.")
+                raise RuntimeError("Invalid WebAssembly LEB128")
             byte = data[start]
             start += 1
             value |= (byte & 0x7F) << shift
@@ -4077,32 +4077,32 @@ def load_public_schema() -> dict[str, object]:
         section_size, body_start = decode_u32(offset + 1)
         body_end = body_start + section_size
         if body_end > len(data):
-            raise RuntimeError("잘린 WebAssembly section입니다.")
+            raise RuntimeError("Truncated WebAssembly section")
         if section_id == 0:
             name_size, payload_start = decode_u32(body_start)
             name_end = payload_start + name_size
             if name_end > body_end:
-                raise RuntimeError("잘린 WebAssembly custom section입니다.")
+                raise RuntimeError("Truncated WebAssembly custom section")
             custom_sections[data[payload_start:name_end]] = data[name_end:body_end]
         offset = body_end
 
     public = custom_sections.get(b"public", b"")
     samples = custom_sections.get(b"samples", b"")
     if len(public) < 8 or public[:4] != b"VBM1":
-        raise RuntimeError("public schema evidence가 없습니다.")
+        raise RuntimeError("Missing public schema evidence")
     payload_length, alphabet_length, crc_id, format_length = public[4:8]
     expected_public = 8 + alphabet_length + format_length
     if len(public) != expected_public or crc_id != 1:
-        raise RuntimeError("public schema evidence가 손상되었습니다.")
+        raise RuntimeError("Corrupt public schema evidence")
     alphabet = public[8 : 8 + alphabet_length].decode("ascii")
     flag_format = public[8 + alphabet_length :].decode("ascii")
 
     if len(samples) < 8 or samples[:4] != b"VBS1":
-        raise RuntimeError("calibration evidence가 없습니다.")
+        raise RuntimeError("Missing calibration evidence")
     note_length, sample_count = struct.unpack_from("<HH", samples, 4)
     sample_start = 8 + note_length
     if len(samples) != sample_start + sample_count * 12:
-        raise RuntimeError("calibration evidence가 손상되었습니다.")
+        raise RuntimeError("Corrupt calibration evidence")
     note = samples[8:sample_start].decode("utf-8")
     observations = []
     for index in range(sample_count):
@@ -4130,17 +4130,17 @@ def load_public_schema() -> dict[str, object]:
 def infer_oracle_parameters(schema: dict[str, object]) -> tuple[int, int, int]:
     calibration = schema.get("calibration")
     if not isinstance(calibration, dict):
-        raise RuntimeError("calibration evidence가 없습니다.")
+        raise RuntimeError("Missing calibration evidence")
     observations = calibration.get("observations")
     if not isinstance(observations, list) or len(observations) < 32:
-        raise RuntimeError("calibration 표본이 부족합니다.")
+        raise RuntimeError("Insufficient calibration samples")
     counters = [int(item["counter"]) for item in observations]
     if counters != list(range(counters[0], counters[0] + len(counters))):
-        raise RuntimeError("calibration counter가 연속적이지 않습니다.")
+        raise RuntimeError("Nonconsecutive calibration counters")
     sizes = [int(item["size"]) for item in observations]
     bucket = math.gcd(*sizes)
     if bucket <= 1:
-        raise RuntimeError("reported-size bucket을 추론하지 못했습니다.")
+        raise RuntimeError("Could not infer reported-size bucket")
 
     stable_periods = []
     for period in range(2, len(sizes) // 2 + 1):
@@ -4150,7 +4150,7 @@ def infer_oracle_parameters(schema: dict[str, object]) -> tuple[int, int, int]:
         if len(totals) >= 3 and len(set(totals)) == 1:
             stable_periods.append(period)
     if bucket not in stable_periods:
-        raise RuntimeError("balanced-noise epoch을 추론하지 못했습니다.")
+        raise RuntimeError("Could not infer balanced-noise epoch")
     epoch_size = bucket
 
     states = {
@@ -4158,10 +4158,10 @@ def infer_oracle_parameters(schema: dict[str, object]) -> tuple[int, int, int]:
         for item in observations
     }
     if len(states) != 1:
-        raise RuntimeError("calibration layout이 일관되지 않습니다.")
+        raise RuntimeError("Inconsistent calibration layouts")
     layout, cover = states.pop()
     if cover != 0:
-        raise RuntimeError("calibration cover가 안정적이지 않습니다.")
+        raise RuntimeError("Unstable calibration cover")
     return layout, bucket, epoch_size
 
 
@@ -4170,7 +4170,7 @@ def safe_seed(counter: int, layout: int) -> int:
         actual_layout, cover = layout_state(counter, seed, STYLE)
         if actual_layout == layout and cover == 0:
             return seed
-    raise RuntimeError("적절한 seed를 찾지 못했습니다.")
+    raise RuntimeError("No suitable seed")
 
 
 class Transport(Protocol):
@@ -4185,7 +4185,7 @@ class Transport(Protocol):
 class HttpTransport:
     def __init__(self):
         if not TEAM_TOKEN:
-            raise RuntimeError("TEAM_TOKEN 환경 변수가 필요합니다.")
+            raise RuntimeError("TEAM_TOKEN is required")
         status = self._post("/api/session", {})
         self.session = str(status["session"])
         self.counter = int(status["counter"])
@@ -4215,7 +4215,7 @@ class HttpTransport:
             except (urllib.error.URLError, ConnectionError, TimeoutError) as error:
                 last_error = error
             time.sleep(0.25 * (2**attempt))
-        raise RuntimeError(f"서버 요청 재시도 실패: {last_error}")
+        raise RuntimeError(f"Request retries exhausted: {last_error}")
 
     def share(self, value: str) -> None:
         self._post("/api/share", {"value": value})
@@ -4266,7 +4266,7 @@ class HttpTransport:
 
 def score(transport: Transport, note: str, layout: int, bucket: int) -> int:
     if transport.counter % bucket:
-        raise RuntimeError("측정은 16요청 epoch 경계에서 시작해야 합니다.")
+        raise RuntimeError("Measurements must start at a 16-request epoch boundary")
     if hasattr(transport, "measure"):
         exports = [
             (safe_seed(transport.counter + offset, layout), STYLE, 0) for offset in range(bucket)
@@ -4288,7 +4288,7 @@ def score_many(transport: Transport, notes: list[str], layout: int, bucket: int)
         counter = transport.counter
         for note in notes:
             if counter % bucket:
-                raise RuntimeError("측정은 16요청 epoch 경계에서 시작해야 합니다.")
+                raise RuntimeError("Measurements must start at a 16-request epoch boundary")
             exports = [(safe_seed(counter + offset, layout), STYLE, 0) for offset in range(bucket)]
             groups.append((note, exports))
             counter += bucket
@@ -4342,7 +4342,7 @@ def solve(transport: Transport) -> tuple[str, int]:
         paths = list(dict.fromkeys(candidate for value, candidate in candidates if value == best))[
             :16
         ]
-        print(f"[{depth + 1}/{length}] 후보 {len(paths)}개 | 요청 {transport.requests}", flush=True)
+        print(f"[{depth + 1}/{length}] candidates={len(paths)} requests={transport.requests}", flush=True)
 
     flags: list[str] = []
     notes: list[str] = []
@@ -4355,14 +4355,14 @@ def solve(transport: Transport) -> tuple[str, int]:
     finals = list(zip(final_scores, flags))
     finals.sort()
     if len(finals) > 1 and finals[0][0] == finals[1][0]:
-        raise RuntimeError("최종 후보가 하나로 결정되지 않았습니다.")
+        raise RuntimeError("Ambiguous final candidate")
     return finals[0][1], transport.requests
 
 
 def main() -> None:
     flag, requests = solve(HttpTransport())
     print(flag)
-    print(f"요청 수: {requests}")
+    print(f"requests={requests}")
 
 
 if __name__ == "__main__":
