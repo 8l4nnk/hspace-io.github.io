@@ -1521,26 +1521,29 @@ SHA{cross_backend_pcode_refinement_requires_real_execution}
 
 ```python
 #!/usr/bin/env python3
-"""Player-side reference solve for the fixed NSST v3 handout.
-
-The addresses and function IDs below are the result of disassembling target.elf,
-walking memory.img, and comparing the public goal/vector semantics. This file
-imports no author implementation and verifies its payload with the distributed
-native checker in a disposable handout copy.
-"""
+"""Patch the public memory image and verify it with the provided checker."""
 
 from __future__ import annotations
 
 import os
-from pathlib import Path
 import shutil
 import struct
 import subprocess
 import tempfile
+from pathlib import Path
 
 START_PC = 0x0760
 KEY_DISPLACEMENT = 0
 COOKIE = 0xC3D2E1F0
+HANDOUT_FILES = (
+    "checker",
+    "flag.enc",
+    "goal.pcode",
+    "memory.img",
+    "payload.template.bin",
+    "target.elf",
+    "vectors.bin",
+)
 
 # (node offset in memory.img, replacement target function ID)
 REPLACEMENTS = (
@@ -1564,18 +1567,9 @@ def locate_handout() -> Path:
             Path(__file__).resolve().parents[1].parent / "for_user",
         ]
     )
-    required = (
-        "checker",
-        "flag.enc",
-        "goal.pcode",
-        "memory.img",
-        "payload.template.bin",
-        "target.elf",
-        "vectors.bin",
-    )
     for candidate in candidates:
         resolved = candidate.resolve()
-        if all((resolved / name).is_file() for name in required):
+        if all((resolved / name).is_file() for name in HANDOUT_FILES):
             return resolved
     raise RuntimeError("run from a no-stack-still-turing for_user directory")
 
@@ -1621,15 +1615,7 @@ def solve() -> str:
     with tempfile.TemporaryDirectory(prefix="nsst-reference-") as directory:
         work = Path(directory) / "handout"
         work.mkdir()
-        for name in (
-            "checker",
-            "flag.enc",
-            "goal.pcode",
-            "memory.img",
-            "payload.template.bin",
-            "target.elf",
-            "vectors.bin",
-        ):
+        for name in HANDOUT_FILES:
             shutil.copy2(handout / name, work / name)
         (work / "payload.bin").write_bytes(payload)
         completed = subprocess.run(
@@ -2520,7 +2506,6 @@ from synthesize_collision_net import synthesize
 
 def build_candidate() -> None:
     encoded = synthesize().assemble(recover_opcodes())
-    (HERE / "reference_candidate.pbc").write_bytes(encoded)
     (USER / "candidate.pbc").write_bytes(encoded)
 
 
@@ -2534,7 +2519,6 @@ def main() -> None:
     finally:
         candidate.write_bytes(original)
         (USER / "receipt.bin").unlink(missing_ok=True)
-        (HERE / "reference_candidate.pbc").unlink(missing_ok=True)
 
 
 if __name__ == "__main__":
