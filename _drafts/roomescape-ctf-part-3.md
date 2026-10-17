@@ -188,7 +188,7 @@ response = HMAC-SHA256(recovered_signing_key, nonce)
 #### 6. Exploit
 
 
-전체 익스플로잇 코드는 [공개 GitHub 저장소에서 확인](https://github.com/GEONWOOHAN/room_escape_ctf/blob/main/blog-exploits/extra-requests/reclaim-exploit.c)할 수 있습니다.
+전체 익스플로잇 코드는 [GitHub 저장소](https://github.com/GEONWOOHAN/room_escape_ctf/blob/main/blog-exploits/extra-requests/reclaim-exploit.c)에서 확인할 수 있습니다.
 
 ### 2.2 봇들 사이에 도는 소문의 출처를 찾아 주세요
 
@@ -842,7 +842,7 @@ SHA{one_semantic_policy_wakes_the_entire_ghost_fleet}
 
 #### 5. Exploit
 
-전체 익스플로잇 코드는 [공개 GitHub 저장소에서 확인](https://github.com/GEONWOOHAN/room_escape_ctf/blob/main/blog-exploits/extra-requests/ghost-callback-exploit.py)할 수 있습니다.
+전체 익스플로잇 코드는 [GitHub 저장소](https://github.com/GEONWOOHAN/room_escape_ctf/blob/main/blog-exploits/extra-requests/ghost-callback-exploit.py)에서 확인할 수 있습니다.
 ### 2.6 금고가 열린 순간의 영상을 찾아 주세요
 
 | 항목 | 내용 |
@@ -1153,7 +1153,7 @@ SHA{wh3n_k3ys_v4n1sh_m3m0ry_r3m3mb3rs}
 
 #### 5. Exploit
 
-전체 익스플로잇 코드는 [공개 GitHub 저장소에서 확인](https://github.com/GEONWOOHAN/room_escape_ctf/blob/main/blog-exploits/extra-requests/keypsake-exploit.py)할 수 있습니다.
+전체 익스플로잇 코드는 [GitHub 저장소](https://github.com/GEONWOOHAN/room_escape_ctf/blob/main/blog-exploits/extra-requests/keypsake-exploit.py)에서 확인할 수 있습니다.
 ### 2.9 나를 쫓아낸 회사의 진짜 복구 기록을 가져오세요
 
 | 항목 | 내용 |
@@ -1218,7 +1218,7 @@ SHA{a1b2c3d4e5f6-90d2}
 
 #### 5. Exploit
 
-전체 익스플로잇 코드는 [공개 GitHub 저장소에서 확인](https://github.com/GEONWOOHAN/room_escape_ctf/blob/main/blog-exploits/extra-requests/vault-boundary-exploit.py)할 수 있습니다.
+전체 익스플로잇 코드는 [GitHub 저장소](https://github.com/GEONWOOHAN/room_escape_ctf/blob/main/blog-exploits/extra-requests/vault-boundary-exploit.py)에서 확인할 수 있습니다.
 ## 3. 마치며
 
 추가 의뢰는 메인 시나리오의 현장 조사와 별도로 진행할 수 있도록 구성했습니다. 웹 서비스의 소스와 동작을 살펴보는 문제부터 커널 객체의 수명 분석, 가상 머신의 최적화 동작 추적, 암호화된 저장소의 복구까지 다양한 주제를 다뤘습니다. 참가자는 각 의뢰서에 담긴 상황을 바탕으로 제공 파일이나 서비스에서 단서를 찾고, 분석 결과를 플래그와 라이트업으로 정리했습니다.
