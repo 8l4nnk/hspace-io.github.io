@@ -185,7 +185,7 @@ response = HMAC-SHA256(recovered_signing_key, nonce)
 
 익스플로잇은 stale receipt를 만들고, 같은 fingerprint에 ordering lane과 redaction lane을 차례로 적용한 뒤 복구 후보를 approval gate에 제출합니다. gate가 `MAC:SHA{...}` 형식의 응답을 반환한 후보만 정답으로 처리합니다.
 
-#### 6. 익스플로잇
+#### 6. Exploit
 
 
 전체 익스플로잇 코드는 [GitHub에서 확인](https://github.com/8l4nnk/hspace-io.github.io/blob/review/roomescape-ctf-series/assets/files/room-escape-ctf/extra-requests/reclaim-exploit.c)할 수 있습니다.
@@ -258,7 +258,7 @@ MBK4 header
 SHA{n0b0dy_s41d_1t_but_3v3ry_b0t_r3m3mb3rs}
 ```
 
-#### 4. 익스플로잇
+#### 4. Exploit
 
 ```python
 #!/usr/bin/env python3
@@ -489,7 +489,7 @@ connect → recover epoch → sheath
 SHA{transpl4nted_c1ph3rt3xt}
 ```
 
-#### 3. 익스플로잇
+#### 3. Exploit
 
 ```python
 import argparse
@@ -660,7 +660,7 @@ with socket.create_connection((args.host, args.port)) as sock:
 SHA{cross_backend_pcode_refinement_requires_real_execution}
 ```
 
-#### 4. 익스플로잇
+#### 4. Exploit
 
 ```python
 #!/usr/bin/env python3
@@ -840,7 +840,7 @@ b' = ROR32(b xor term1, rot1) + a'
 SHA{one_semantic_policy_wakes_the_entire_ghost_fleet}
 ```
 
-#### 5. 익스플로잇
+#### 5. Exploit
 
 전체 익스플로잇 코드는 [GitHub에서 확인](https://github.com/8l4nnk/hspace-io.github.io/blob/review/roomescape-ctf-series/assets/files/room-escape-ctf/extra-requests/ghost-callback-exploit.py)할 수 있습니다.
 ### 2.6 금고가 열린 순간의 영상을 찾아 주세요
@@ -915,7 +915,7 @@ HKDF-SHA256(
 SHA{phantom_frames_survive_optimization}
 ```
 
-#### 4. 익스플로잇
+#### 4. Exploit
 
 ```python
 #!/usr/bin/env python3
@@ -1056,7 +1056,7 @@ password: x
 SHA{wh0_ate_the_tuna_at_0404}
 ```
 
-#### 5. 익스플로잇
+#### 5. Exploit
 
 ```python
 #!/usr/bin/env python3
@@ -1151,7 +1151,7 @@ Q - known*G = left*G + right*G
 SHA{wh3n_k3ys_v4n1sh_m3m0ry_r3m3mb3rs}
 ```
 
-#### 5. 익스플로잇
+#### 5. Exploit
 
 전체 익스플로잇 코드는 [GitHub에서 확인](https://github.com/8l4nnk/hspace-io.github.io/blob/review/roomescape-ctf-series/assets/files/room-escape-ctf/extra-requests/keypsake-exploit.py)할 수 있습니다.
 ### 2.9 나를 쫓아낸 회사의 진짜 복구 기록을 가져오세요
@@ -1216,7 +1216,7 @@ CRC16-CCITT   : 90d2
 SHA{a1b2c3d4e5f6-90d2}
 ```
 
-#### 5. 익스플로잇
+#### 5. Exploit
 
 ```python
 from __future__ import annotations
