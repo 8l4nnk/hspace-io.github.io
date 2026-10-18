@@ -1,10 +1,10 @@
 {
   "checked_on": "2026-10-18",
-  "source_sha256": "275ddaf397d6db4d4d2d9780239763c4737b4f18b11c5eb4bf9cc6202c28b1ff",
+  "source_sha256": "f86cacbf0d58279f6847f331fec101c5a83d7d8e569fdf2c01c5596d588e13e0",
   "article_text_preserved": true,
-  "body_images": 21,
+  "body_images": 22,
   "captions": 20,
-  "toc_links": 25,
+  "toc_links": 24,
   "assets": [
     {
       "path": "assets/img/room-escape-ctf/overview/20-event-poster.png",
@@ -19,11 +19,6 @@
     {
       "path": "assets/img/room-escape-ctf/overview/15-event-photo-poster.jpg",
       "sha256": "81326c243ae38ef7965cf78115949e0fd476ed2e83ada3d0dcf035a8ea2610cf",
-      "changed": true
-    },
-    {
-      "path": "assets/img/room-escape-ctf/overview/19-preparation-group-photo.png",
-      "sha256": "123b86b26bbb009897257208aa77cc355ad2645ae799d37b41946236ee21aba7",
       "changed": true
     },
     {
@@ -116,29 +111,38 @@
       "path": "assets/img/room-escape-ctf/overview/12-parallel-rooms.svg",
       "sha256": "64a58b81c101ffca424470f8908883c09b641ffa77ac1a7e3498bbf5dffa8daf",
       "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/21-uosint-location.png",
+      "sha256": "2608b573be76ff31d63040dc930f08f27f22d13e8783fd371afb21a59eed4267",
+      "changed": true
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/22-uosint-flag.png",
+      "sha256": "415549f26a94326f623108275e8eadd788dafd9f2552a9067b6f471df33d4c55",
+      "changed": true
     }
   ],
   "kramdown_version": "2.5.2",
   "kramdown_warnings": 0,
-  "rendered_images": 21,
+  "rendered_images": 22,
   "rendered_tables": 7,
   "rendered_captions": 20,
-  "rendered_toc_links": 25,
-  "github_preview_images": 21,
+  "rendered_toc_links": 24,
+  "github_preview_images": 22,
   "github_preview_links_valid": true,
   "full_jekyll_site_build": true,
   "inline_article_styles_removed": true,
   "scoped_stylesheet_compiled": true,
   "tables": 7,
   "all_three_series_pages_built": true,
-  "draft_sha256": "2e85ae14a1b7725e002a044a07d5408c6da98d832d8cdcea281dca6046ebdc08",
+  "draft_sha256": "f4f6740c56a2b0442bec2df1442337e61e94ba80e1ff25746a265a84316b11c1",
   "jekyll_version": "4.4.1",
   "jekyll_build_exit_code": 0,
   "browser_preview": {
     "poster_width_px": 460,
     "poster_center_offset_px": 0,
     "captions_centered": true,
-    "behind_story_style_verified": true,
     "mobile_viewport_width_px": 390,
     "mobile_document_width_px": 375,
     "mobile_poster_width_px": 343,
@@ -153,6 +157,14 @@
       4032,
       3024
     ],
-    "outside_masks_pixel_identical": true
-  }
+    "outside_masks_pixel_identical": true,
+    "current_figure_number": 5
+  },
+  "behind_story_removed": true,
+  "upload_authorized_by_user": true,
+  "headquarters_term": "수사 본부",
+  "part_3_reference_added": true,
+  "remaining_article_text_preserved": true,
+  "uosint_example_added": true,
+  "uosint_example_original_photos_preserved": true
 }
