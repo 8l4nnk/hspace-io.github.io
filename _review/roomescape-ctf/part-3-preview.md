@@ -5,7 +5,7 @@
 > GitHub 검토용 사본입니다. 블로그 게시용 원고는 [`_drafts/roomescape-ctf-part-3.md`](../../_drafts/roomescape-ctf-part-3.md)에 있습니다.
 
 
-> 이 글은 방탈출 CTF 운영기 3편입니다. 대회의 기획과 준비·운영 과정은 [1편: 기획과 준비](part-1-preview.md)에서 다루며, 메인 시나리오를 소개할 2편은 준비 중입니다.
+> 이 글은 방탈출 CTF 운영기 3편입니다. 대회의 기획과 준비·운영 과정은 [1편: 기획과 준비](part-1-preview.md)에서, 메인 의뢰의 풀이는 [2편: 메인 의뢰](part-2-preview.md)에서 다룹니다.
 
 ## 목차
 

@@ -13,6 +13,8 @@ toc: false
 image: /assets/img/room-escape-ctf/extra-requests/ctfd-additional-requests-list.png
 ---
 
+> 이 연재는 1편 **기획과 준비**, 2편 **메인 의뢰**, 3편 **추가 의뢰**로 구성됩니다. [1편: 기획과 준비](/posts/roomescape-ctf-part-1/) · [2편: 메인 의뢰](/posts/roomescape-ctf-part-2/)
+
 ## 목차
 
 1. [추가 의뢰](#1-추가-의뢰)
