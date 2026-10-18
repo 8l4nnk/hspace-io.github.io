@@ -1,7 +1,7 @@
 {
   "source_archive": "블로그2.zip",
   "source_markdown": "주바해 블로그 3e92f7a9e0a880ce8416e971ba48c91e.md",
-  "source_markdown_sha256": "f6c6d133c45cdacb92413c85d86bcd888c67825eda8408118abc0914df32dd32",
+  "source_markdown_sha256": "f61bf5d718e2c417acd71e68c1a8adafe904354cb880634fd810d25f52e80fed",
   "images": [
     {
       "source": "문제_트리.png",
@@ -11,7 +11,7 @@
     {
       "source": "image.png",
       "destination": "figure-002.png",
-      "sha256": "78ef76057c6c36d13bb2f6e0a6b26eff3ee1d4701f6d4ad874845cff83af7cac"
+      "sha256": "4676351146da78ecd3e2549ae0ffc19e35b2e67b5ee0a75ffff20e4702738950"
     },
     {
       "source": "image 1.png",
@@ -51,7 +51,7 @@
     {
       "source": "5dc9cbd4-31f0-41f8-a622-00390b89ef28.png",
       "destination": "figure-010.png",
-      "sha256": "f8a044430af907b90446758e1b5abacfc7fd74f6ccd7448464acf9ae4571cd28"
+      "sha256": "a701a4fdf26f08568cbdb88cc94e305565a5551854ff236df73421dfe32d583b"
     },
     {
       "source": "image 6.png",
@@ -181,7 +181,7 @@
     {
       "source": "421cd2b3-a717-4571-9452-c34a828896c7.png",
       "destination": "figure-036.png",
-      "sha256": "ac7e47e01f8eaf8a2983dca23f17ee871b2fa65958331b480d378b1eaece6706"
+      "sha256": "0775034852761cfbe0a69c2f76adce082181e97482193dba44ab412c6d9c9b29"
     },
     {
       "source": "image 30.png",
@@ -211,7 +211,7 @@
     {
       "source": "image 35.png",
       "destination": "figure-042.png",
-      "sha256": "34cf352ef134141bcbf2beeaf29f7d8b380a11e4b5a62ceb6a5a0049e964e097"
+      "sha256": "aa52751af10520d3f3a6da8b83b8c3d65a4f74d21151b6e62951921b40b3b1d6"
     },
     {
       "source": "image 36.png",
@@ -241,7 +241,7 @@
     {
       "source": "image 41.png",
       "destination": "figure-048.png",
-      "sha256": "27323b920e04b3d129b4a10063b737809e3550536134cd8fcb30203babeb08fd"
+      "sha256": "06be6dc089008cf84dae217396db86f832c794200ea004c5e438be425e254d97"
     },
     {
       "source": "image 42.png",
@@ -396,7 +396,7 @@
     {
       "source": "image 72.png",
       "destination": "figure-079.png",
-      "sha256": "993d33236c77bd2e790c09516b9d5d078ecd2d7a3a965dc1409c79c87f6cd04c"
+      "sha256": "70b382f5432c62094417bcf857612b8c1d6ec189b1636c7b80105be5261c0cce"
     },
     {
       "source": "image 73.png",
@@ -531,7 +531,7 @@
     {
       "source": "image 99.png",
       "destination": "figure-106.png",
-      "sha256": "7b9d16f73bb35c17bd71ff2011720f28bfa9cf68e1369e040c08f5b50ee2fb62"
+      "sha256": "93f761377f7a594f9764e5467ce2d66cdd1d58cdcc0a2270e17b861d84c13ff3"
     },
     {
       "source": "image 100.png",
@@ -656,7 +656,7 @@
     {
       "source": "image 122.png",
       "destination": "figure-131.png",
-      "sha256": "65a1d954f88342ee5da986b927c34f0a2da1760ee02e4a051db590a472fb9e67"
+      "sha256": "b6e7d3b5c26da9c91d66b6a13ee6e45e87d6dffc70812ba79d3998fee3b6eaa0"
     },
     {
       "source": "image 123.png",
@@ -872,16 +872,7 @@
       "source": "image 163.png",
       "destination": "figure-174.png",
       "sha256": "b8156def5c19829325ebdbbbfdef7988b1f70d797eeb501f73f1ffc4b716b14d"
-    },
-    {
-      "source": "image 164.png",
-      "destination": "figure-175.png",
-      "sha256": "0620befbdb1106569a5fff805367c2c6b8f80a8c0a9bc36898524f38d3c4c3e2"
-    },
-    {
-      "source": "image 165.png",
-      "destination": "figure-176.png",
-      "sha256": "fd60e5ffd8711adaed59169c887bb00d1d2e08f8995b7cffacf88c314d9b38d3"
     }
-  ]
+  ],
+  "source_archive_sha256": "6d9e67cb6eb58863996f2191984d10b60fea7a0aa79d1d602a2180bd3abd9dd1"
 }
