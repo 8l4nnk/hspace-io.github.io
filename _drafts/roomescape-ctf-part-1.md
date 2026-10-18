@@ -15,69 +15,6 @@ image: # 본문 도입부에 포스터 전체를 표시합니다.
 
 > 이 연재는 1편 **기획과 준비**, 2편 **메인 의뢰**, 3편 **추가 의뢰**로 구성됩니다. 이 글에서는 기획 배경과 준비·운영 경험을 다룹니다. [2편: 메인 의뢰](/posts/roomescape-ctf-part-2/) · [3편: 추가 의뢰](/posts/roomescape-ctf-part-3/)
 
-<!-- CTF_CAPTIONS_START -->
-<style>
-.figure-caption, .figure-caption p {
-  text-align: center;
-}
-img[src$="/20-event-poster.png"] {
-  display: block;
-  width: 460px;
-  max-width: 100%;
-  height: auto;
-  margin-left: auto;
-  margin-right: auto;
-}
-blockquote:has(#behind-the-scenes) {
-  margin: 40px 0;
-  padding: 0 0 0 20px;
-  border: 0;
-  border-left: 5px solid var(--blockquote-border-color, #eeeeee);
-  border-radius: 0;
-  background: transparent;
-  color: var(--blockquote-text-color, #757575);
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  font-style: normal;
-}
-blockquote:has(#behind-the-scenes) > p:has(> #behind-the-scenes) {
-  margin: 0;
-}
-blockquote:has(#behind-the-scenes) > h3 {
-  margin: 0 0 20px;
-  color: var(--heading-color, #2a2a2a);
-  font-weight: 400;
-}
-blockquote:has(#behind-the-scenes) img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 24px auto 0;
-  border-radius: 8px;
-}
-blockquote:has(#behind-the-scenes) .figure-caption,
-blockquote:has(#behind-the-scenes) .figure-caption p {
-  margin-bottom: 0;
-}
-@media (max-width: 640px) {
-  blockquote:has(#behind-the-scenes) {
-    padding: 0 0 0 16px;
-    margin: 32px 0;
-  }
-}
-p:has(> img[src*="/room-escape-ctf/overview/"]),
-p:has(> a.img-link > img[src*="/room-escape-ctf/overview/"]) {
-  text-align: center;
-}
-img[src*="/room-escape-ctf/overview/"][src*="event-photo-"] {
-  max-height: 680px;
-  width: auto;
-  max-width: 100%;
-}
-</style>
-<!-- CTF_CAPTIONS_END -->
-
 2026년 9월 19일, 서울시립대학교 보안 동아리 SHA가 암호 동아리 도어락과 공동으로 방탈출 CTF 대회 〈주말에 뭐 하세요? 바쁘세요? 해결 가능하신가요?〉를 개최했습니다. 참가자는 팀별 탐정사무소를 구성해 캠퍼스의 수사 현장을 조사하고, **현장에서 얻은 단서와 온라인 CTF 문제를 연결**해 사건을 해결했습니다.
 
 ![방탈출 CTF 대회 포스터](/assets/img/room-escape-ctf/overview/20-event-poster.png)

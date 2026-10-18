@@ -1,0 +1,57 @@
+// Styles for the escape-room CTF overview article only.
+.content:has(img[src$="/room-escape-ctf/overview/20-event-poster.png"]) {
+  .figure-caption, .figure-caption p {
+    text-align: center;
+  }
+  img[src$="/20-event-poster.png"] {
+    display: block;
+    width: 460px;
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  blockquote:has(#behind-the-scenes) {
+    margin: 40px 0;
+    padding: 0 0 0 20px;
+    border: 0;
+    border-left: 5px solid var(--blockquote-border-color, #eeeeee);
+    border-radius: 0;
+    background: transparent;
+    color: var(--blockquote-text-color, #757575);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    font-style: normal;
+  }
+  blockquote:has(#behind-the-scenes) > p:has(> #behind-the-scenes) {
+    margin: 0;
+  }
+  blockquote:has(#behind-the-scenes) > h3 {
+    margin: 0 0 20px;
+    color: var(--heading-color, #2a2a2a);
+    font-weight: 400;
+  }
+  blockquote:has(#behind-the-scenes) img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 24px auto 0;
+    border-radius: 8px;
+  }
+  blockquote:has(#behind-the-scenes) .figure-caption,
+  blockquote:has(#behind-the-scenes) .figure-caption p {
+    margin-bottom: 0;
+  }
+  @media (max-width: 640px) {
+    blockquote:has(#behind-the-scenes) {
+      padding: 0 0 0 16px;
+      margin: 32px 0;
+    }
+  }
+  img[src*="/room-escape-ctf/overview/"][src*="event-photo-"] {
+    max-height: 680px;
+    width: auto;
+    max-width: 100%;
+  }
+}

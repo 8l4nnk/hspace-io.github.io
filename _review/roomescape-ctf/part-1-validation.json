@@ -1,6 +1,6 @@
 {
   "checked_on": "2026-10-18",
-  "source_sha256": "063dfff5d62d23b4f3a7fc75eb5aba5f9c9af4204d185acb6d16856b40f59e2b",
+  "source_sha256": "165987806e372cafde4c453a5f65aa066c0cc61efa3b2ccc30cc0eac633ef04e",
   "article_text_preserved": true,
   "body_images": 21,
   "captions": 20,
@@ -125,5 +125,23 @@
   "rendered_toc_links": 25,
   "github_preview_images": 21,
   "github_preview_links_valid": true,
-  "full_jekyll_site_build": false
+  "full_jekyll_site_build": true,
+  "inline_article_styles_removed": true,
+  "scoped_stylesheet_compiled": true,
+  "tables": 7,
+  "all_three_series_pages_built": true,
+  "draft_sha256": "bb205b7c3c71dee97f55c8b587b25585ec385dbd6ffe6e569d379428f05c7fab",
+  "jekyll_version": "4.4.1",
+  "jekyll_build_exit_code": 0,
+  "browser_preview": {
+    "poster_width_px": 460,
+    "poster_center_offset_px": 0,
+    "captions_centered": true,
+    "behind_story_style_verified": true,
+    "mobile_viewport_width_px": 390,
+    "mobile_document_width_px": 375,
+    "mobile_poster_width_px": 343,
+    "mobile_horizontal_page_overflow": false,
+    "wide_tables_scroll_internally": true
+  }
 }
