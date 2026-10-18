@@ -274,22 +274,22 @@ CTF 분야는 Web, Pwnable, Reversing, Crypto, Forensics, AI, Misc를 포함했�
 
 </div>
 
-아래는 여덟 개 플래그 중 하나를 숨겨 둔 위치와 실제 플래그의 예시입니다. 서브웨이 매장 벽 아래쪽에 붙여 둔 `SHA{SUBWAYISWATCHINGYOU}`를 찾아 제출하면, UOSINT 진행률이 올라갑니다.
+아래는 UOSINT에서 찾아야 했던 장소와 실제 플래그의 예시입니다. 사진 속 장소를 찾아 플래그를 제출하면, UOSINT 진행률이 올라갑니다.
 
 <div class="uosint-example">
   <div>
-    <img src="/assets/img/room-escape-ctf/overview/21-uosint-location.png" alt="서브웨이 매장 벽 아래쪽의 플래그 위치를 화살표로 표시한 사진" width="340">
-    <p>플래그가 있던 위치</p>
+    <img src="/assets/img/room-escape-ctf/overview/21-uosint-location.png" alt="UOSINT 장소 예시로 교내 조형물을 붉은 원으로 표시한 사진" width="340">
+    <p>장소 예시: 교내 조형물</p>
   </div>
   <div>
     <img src="/assets/img/room-escape-ctf/overview/22-uosint-flag.png" alt="서브웨이 매장 벽 아래쪽에 부착한 SHA{SUBWAYISWATCHINGYOU} 플래그" width="340">
-    <p>현장에 부착한 플래그</p>
+    <p>플래그 예시: 서브웨이 매장 벽</p>
   </div>
 </div>
 
 <div class="figure-caption" align="center" markdown="1">
 
-*그림 7. UOSINT 플래그 예시. 사진 속 장소를 찾아 주변을 살피면 플래그를 발견할 수 있습니다.*
+*그림 7. UOSINT 장소와 플래그 예시. 왼쪽은 교내 조형물, 오른쪽은 서브웨이 매장 벽에 부착한 플래그입니다.*
 
 </div>
 

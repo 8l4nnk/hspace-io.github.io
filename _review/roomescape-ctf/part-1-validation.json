@@ -1,6 +1,6 @@
 {
-  "checked_on": "2026-10-18",
-  "source_sha256": "1b71fc182378a7cf94f1a3a54cbc818544986b7851532e8c6978cb0f47e28581",
+  "checked_on": "2026-10-19",
+  "source_sha256": "f5364e1ac609262475555d46ad5657bc9c6b728ba151e9c8642237d21013e703",
   "article_text_preserved": true,
   "body_images": 22,
   "captions": 20,
@@ -114,7 +114,7 @@
     },
     {
       "path": "assets/img/room-escape-ctf/overview/21-uosint-location.png",
-      "sha256": "2608b573be76ff31d63040dc930f08f27f22d13e8783fd371afb21a59eed4267",
+      "sha256": "c5ca397e4c8d2af84858cc8c429a18408b8e284cfc7de795ea2a902c58230bc2",
       "changed": true
     },
     {
@@ -136,7 +136,7 @@
   "scoped_stylesheet_compiled": true,
   "tables": 7,
   "all_three_series_pages_built": true,
-  "draft_sha256": "f0084dc4a82d8f7a5f8bff64541212d10bd45b5d0c6560c09e0b78d2f1765995",
+  "draft_sha256": "1a9ddc5003336d9131502d46be9ae6bd164ac4e515f1785a5ebd5db8dd2cbda5",
   "jekyll_version": "4.4.1",
   "jekyll_build_exit_code": 0,
   "browser_preview": {
@@ -166,5 +166,7 @@
   "part_3_reference_added": true,
   "remaining_article_text_preserved": true,
   "uosint_example_added": true,
-  "uosint_example_original_photos_preserved": true
+  "uosint_example_original_photos_preserved": true,
+  "uosint_location_photo": "campus sculpture",
+  "uosint_examples_are_distinct_locations": true
 }
