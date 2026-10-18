@@ -1,0 +1,129 @@
+{
+  "checked_on": "2026-10-18",
+  "source_sha256": "063dfff5d62d23b4f3a7fc75eb5aba5f9c9af4204d185acb6d16856b40f59e2b",
+  "article_text_preserved": true,
+  "body_images": 21,
+  "captions": 20,
+  "toc_links": 25,
+  "assets": [
+    {
+      "path": "assets/img/room-escape-ctf/overview/20-event-poster.png",
+      "sha256": "693dea04a460d5bc6080985039b0e81a8eda73adc3e63a4757ba08e2ff39b7aa",
+      "changed": true
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/18-event-photo-venue.jpg",
+      "sha256": "8e3a93508d840e4ed1125de79aad4edd52a92330e7b163f0264904b6ffaac909",
+      "changed": true
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/15-event-photo-poster.jpg",
+      "sha256": "81326c243ae38ef7965cf78115949e0fd476ed2e83ada3d0dcf035a8ea2610cf",
+      "changed": true
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/19-preparation-group-photo.png",
+      "sha256": "123b86b26bbb009897257208aa77cc355ad2645ae799d37b41946236ee21aba7",
+      "changed": true
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/02-extra-cases.png",
+      "sha256": "625d3960953563b079daeac9c28a1a96430ebd5e090cb182eab6af3550fe69b0",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/16-event-photo-investigation.jpg",
+      "sha256": "a3c297c3a394b9dd34ba88052e4d6dce83986294388637b852c65cfbb77479bf",
+      "changed": true
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/03-uosint.png",
+      "sha256": "1d153eacafba4a07e933f4f23aa4946c9e01608e05c379c28b40da532edcccff",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/01-main.png",
+      "sha256": "6409f19bfe1982f09974abde90a2adaf3e3af5dac45f859810ef0d62a91a6aef",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/04-field-map.png",
+      "sha256": "38c1d652961f76643c87ac98cab1758c2b94f1dc66a67c861fce8e6804990dd0",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/05-scenario-tree.png",
+      "sha256": "ebc2d6b89b71286c162104633b58af35f5b17459685927ac54c711b180bf7f7a",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/06-scoreboard.png",
+      "sha256": "3da4faa2d1a66a3d2ffc47785ac2600c3970c758e31117419155eebca62dbc0d",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/06-scoreboard-legend.png",
+      "sha256": "0f66e56893ee062a6e6c774a06ba7025585ebe144b26cd5bbdde62c04a5a67d2",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/07-notices.png",
+      "sha256": "777d92a7f351482d021244f4a38c3d609ee37faf0aa6447e7cddb8ae900e4ee5",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/13-participant-ot.jpg",
+      "sha256": "53b18590eaa15762fdbd7476fa7495ae8f1e81965e624a2dadb27855dedde87b",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/14-team-channels-uos.png",
+      "sha256": "e57efa5a4c6c2ff8e809b2c877aa6378af51eb22e5ca697b39dd149d73c968c9",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/08-queue-overview.png",
+      "sha256": "48cfa9c98567917f1234d26b257af862fb2406df005440ceb2b82cca90956c0c",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/17-event-photo-hallway.jpg",
+      "sha256": "932cc175531df49d6e1fd317b949ffdc08b050447db505f4188d9b13ebc6626e",
+      "changed": true
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/09-queue-login.png",
+      "sha256": "e1381b3570ef4d4acc329145373ddb6096e444bfa2e98aea9d5eea53b87e5159",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/10-queue-admin.png",
+      "sha256": "918c0be4c626b88e8348bb888f2b7541e488d5cc6d130681ba217c6b74b09fb0",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/12-parallel-rooms.png",
+      "sha256": "f1c0ddfce5c417f4006f1fd63a7a4458cb8516f48e1f01298d4b8d3e60c1d45b",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/00-group-photo.jpg",
+      "sha256": "05b520736aa066750de0c1b2f49baedadd01033ab857a5fc075b4e22d3f56464",
+      "changed": false
+    },
+    {
+      "path": "assets/img/room-escape-ctf/overview/12-parallel-rooms.svg",
+      "sha256": "64a58b81c101ffca424470f8908883c09b641ffa77ac1a7e3498bbf5dffa8daf",
+      "changed": false
+    }
+  ],
+  "kramdown_version": "2.5.2",
+  "kramdown_warnings": 0,
+  "rendered_images": 21,
+  "rendered_tables": 7,
+  "rendered_captions": 20,
+  "rendered_toc_links": 25,
+  "github_preview_images": 21,
+  "github_preview_links_valid": true,
+  "full_jekyll_site_build": false
+}
