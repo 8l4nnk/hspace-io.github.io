@@ -1,6 +1,6 @@
 {
   "checked_on": "2026-10-19",
-  "source_sha256": "f5364e1ac609262475555d46ad5657bc9c6b728ba151e9c8642237d21013e703",
+  "source_sha256": "edcc4a5c8af1197333af69bd65dbb0ae1b59c27f8ef54b851aac6561e450d6d3",
   "article_text_preserved": true,
   "body_images": 22,
   "captions": 20,
@@ -136,7 +136,7 @@
   "scoped_stylesheet_compiled": true,
   "tables": 7,
   "all_three_series_pages_built": true,
-  "draft_sha256": "1a9ddc5003336d9131502d46be9ae6bd164ac4e515f1785a5ebd5db8dd2cbda5",
+  "draft_sha256": "3f394a0941e2b1d581d7922825c2c850d715931b86968b338535686a15fde44a",
   "jekyll_version": "4.4.1",
   "jekyll_build_exit_code": 0,
   "browser_preview": {

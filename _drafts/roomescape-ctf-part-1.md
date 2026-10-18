@@ -279,17 +279,17 @@ CTF 분야는 Web, Pwnable, Reversing, Crypto, Forensics, AI, Misc를 포함했�
 <div class="uosint-example">
   <div>
     <img src="/assets/img/room-escape-ctf/overview/21-uosint-location.png" alt="UOSINT 장소 예시로 교내 조형물을 붉은 원으로 표시한 사진" width="340">
-    <p>장소 예시: 교내 조형물</p>
+    <p>장소 예시</p>
   </div>
   <div>
-    <img src="/assets/img/room-escape-ctf/overview/22-uosint-flag.png" alt="서브웨이 매장 벽 아래쪽에 부착한 SHA{SUBWAYISWATCHINGYOU} 플래그" width="340">
-    <p>플래그 예시: 서브웨이 매장 벽</p>
+    <img src="/assets/img/room-escape-ctf/overview/22-uosint-flag.png" alt="현장에 부착한 SHA{SUBWAYISWATCHINGYOU} 플래그" width="340">
+    <p>플래그 예시</p>
   </div>
 </div>
 
 <div class="figure-caption" align="center" markdown="1">
 
-*그림 7. UOSINT 장소와 플래그 예시. 왼쪽은 교내 조형물, 오른쪽은 서브웨이 매장 벽에 부착한 플래그입니다.*
+*그림 7. UOSINT 장소 예시(왼쪽)와 플래그 예시(오른쪽).*
 
 </div>
 
