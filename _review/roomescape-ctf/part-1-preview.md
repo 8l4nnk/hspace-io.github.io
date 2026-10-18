@@ -238,7 +238,7 @@ CTF 분야는 Web, Pwnable, Reversing, Crypto, Forensics, AI, Misc를 포함했�
 5. 퇴장 후 기록을 수사팀과 공유하고 온라인 분석을 진행합니다.
 6. 얻은 플래그는 대회 사이트에 제출하고, 증거와 출처는 보고서용으로 정리합니다.
 
-![조사실 책상 위의 문서와 자료를 함께 살펴보는 참가자들](../../assets/img/room-escape-ctf/overview/16-event-photo-investigation.jpg)
+![조사실 책상 위의 문서와 자료를 함께 살펴보는 참가자들](../../assets/img/room-escape-ctf/overview/16-event-photo-investigation-blurred.png)
 
 <div class="figure-caption" align="center">
 

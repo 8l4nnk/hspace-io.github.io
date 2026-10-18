@@ -1,6 +1,6 @@
 {
   "checked_on": "2026-10-18",
-  "source_sha256": "165987806e372cafde4c453a5f65aa066c0cc61efa3b2ccc30cc0eac633ef04e",
+  "source_sha256": "275ddaf397d6db4d4d2d9780239763c4737b4f18b11c5eb4bf9cc6202c28b1ff",
   "article_text_preserved": true,
   "body_images": 21,
   "captions": 20,
@@ -32,9 +32,10 @@
       "changed": false
     },
     {
-      "path": "assets/img/room-escape-ctf/overview/16-event-photo-investigation.jpg",
-      "sha256": "a3c297c3a394b9dd34ba88052e4d6dce83986294388637b852c65cfbb77479bf",
-      "changed": true
+      "path": "assets/img/room-escape-ctf/overview/16-event-photo-investigation-blurred.png",
+      "sha256": "a016bf929c2add336f9fa44a44c23dc34362b85a41e7125508664d9f6896e0d0",
+      "changed": true,
+      "privacy_edit": "Feathered Gaussian blur on two faces and two name badges; all pixels outside the masks preserved."
     },
     {
       "path": "assets/img/room-escape-ctf/overview/03-uosint.png",
@@ -130,7 +131,7 @@
   "scoped_stylesheet_compiled": true,
   "tables": 7,
   "all_three_series_pages_built": true,
-  "draft_sha256": "bb205b7c3c71dee97f55c8b587b25585ec385dbd6ffe6e569d379428f05c7fab",
+  "draft_sha256": "2e85ae14a1b7725e002a044a07d5408c6da98d832d8cdcea281dca6046ebdc08",
   "jekyll_version": "4.4.1",
   "jekyll_build_exit_code": 0,
   "browser_preview": {
@@ -143,5 +144,15 @@
     "mobile_poster_width_px": 343,
     "mobile_horizontal_page_overflow": false,
     "wide_tables_scroll_internally": true
+  },
+  "figure_6_privacy_edit": {
+    "faces": 2,
+    "name_badges": 2,
+    "method": "Python Pillow GaussianBlur with feathered masks",
+    "source_dimensions_preserved": [
+      4032,
+      3024
+    ],
+    "outside_masks_pixel_identical": true
   }
 }
