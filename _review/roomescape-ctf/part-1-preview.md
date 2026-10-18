@@ -265,7 +265,7 @@ CTF 분야는 Web, Pwnable, Reversing, Crypto, Forensics, AI, Misc를 포함했�
 
 </div>
 
-아래는 여덟 개 플래그 중 하나를 숨겨 둔 위치와 실제 플래그의 예시입니다. 서브웨이 매장 벽 아래쪽에 붙여 둔 `SHA{SUBWAYISWATCHINGYOU}`를 찾아 제출하는 방식입니다.
+아래는 여덟 개 플래그 중 하나를 숨겨 둔 위치와 실제 플래그의 예시입니다. 서브웨이 매장 벽 아래쪽에 붙여 둔 `SHA{SUBWAYISWATCHINGYOU}`를 찾아 제출하면, UOSINT 진행률이 올라갑니다.
 
 <div class="uosint-example">
   <div>
