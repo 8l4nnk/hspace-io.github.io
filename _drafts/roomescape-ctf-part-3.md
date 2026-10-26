@@ -1,7 +1,7 @@
 ---
 title: "방탈출 CTF 운영기 3편: 추가 의뢰"
 description: "방탈출 CTF의 추가 의뢰 9개를 독립형 문제로 구성한 배경과 문제별 분석 원리, 재현 가능한 풀이를 소개합니다."
-author: 한건우
+author: SHA
 # 게시일 확정 후 _posts로 이동합니다.
 tags: [Tech, CTF, roomescape]
 categories: [Tech, CTF]
@@ -10,7 +10,7 @@ math: false
 mermaid: false
 pin: false
 toc: false
-image: /assets/img/room-escape-ctf/extra-requests/ctfd-additional-requests-list.png
+render_with_liquid: false
 ---
 
 > 이 연재는 1편 **기획과 준비**, 2편 **메인 의뢰**, 3편 **추가 의뢰**로 구성됩니다. [1편: 기획과 준비](/posts/roomescape-ctf-part-1/) · [2편: 메인 의뢰](/posts/roomescape-ctf-part-2/)
@@ -34,9 +34,7 @@ image: /assets/img/room-escape-ctf/extra-requests/ctfd-additional-requests-list.
 
 ### 1.1 메인 시나리오와의 관계
 
-추가 의뢰는 현장 조사 중심의 메인 시나리오와 별도로 제공한 독립형 Jeopardy 문제입니다. 메인 시나리오의 방 순서나 진행 단계와 연결되지 않아 참가자는 대회 플랫폼에서 원하는 의뢰를 골라 순서와 관계없이 해결할 수 있었습니다. 추가 의뢰를 풀지 않아도 메인 시나리오를 계속 진행할 수 있었으며, 획득한 점수는 전체 순위에 합산했습니다.
-
-현장 조사와 별도 분석 공간의 문제 풀이를 병행할 수 있도록 마련한 구성입니다. 메인 시나리오가 현장의 문서·사물·디지털 자료를 연결해 사건을 조사하는 방식이라면, 추가 의뢰는 각기 다른 사건의 의뢰서를 바탕으로 제공 파일이나 원격 서비스에서 필요한 정보를 찾아 해결하는 방식으로 진행했습니다.
+추가 의뢰는 현장 조사 중심의 메인 시나리오와 별도로 제공한 독립형 Jeopardy 문제입니다. 기존 CTF 정서에 맞는 구성도 필요하다는 판단하에, 메인 시나리오의 방 순서나 진행 단계와 연결되지 않도록 기획했습니다. 따라서 참가자는 대회 플랫폼에서 원하는 의뢰를 골라 순서와 관계없이 해결할 수 있었습니다. 추가 의뢰를 풀지 않아도 메인 시나리오를 계속 진행할 수 있었지만, 불시에 공개된다는 특징이 있었기에 팀 구성에 적절한 전략이 필요했을 것입니다.
 
 ### 1.2 의뢰서 형식
 
@@ -187,7 +185,7 @@ response = HMAC-SHA256(recovered_signing_key, nonce)
 
 익스플로잇은 stale receipt를 만들고, 같은 fingerprint에 ordering lane과 redaction lane을 차례로 적용한 뒤 복구 후보를 approval gate에 제출합니다. gate가 `MAC:SHA{...}` 형식의 응답을 반환한 후보만 정답으로 처리합니다.
 
-#### 6. Exploit
+#### 6. exploit
 
 
 전체 익스플로잇 코드는 [GitHub 저장소](https://github.com/GEONWOOHAN/room_escape_ctf/blob/main/blog-exploits/extra-requests/reclaim-exploit.c)에서 확인할 수 있습니다.
@@ -260,7 +258,7 @@ MBK4 header
 SHA{n0b0dy_s41d_1t_but_3v3ry_b0t_r3m3mb3rs}
 ```
 
-#### 4. Exploit
+#### 4. exploit
 
 ```python
 #!/usr/bin/env python3
@@ -491,7 +489,7 @@ connect → recover epoch → sheath
 SHA{transpl4nted_c1ph3rt3xt}
 ```
 
-#### 3. Exploit
+#### 3. exploit
 
 ```python
 import argparse
@@ -662,7 +660,7 @@ with socket.create_connection((args.host, args.port)) as sock:
 SHA{cross_backend_pcode_refinement_requires_real_execution}
 ```
 
-#### 4. Exploit
+#### 4. exploit
 
 ```python
 #!/usr/bin/env python3
@@ -842,7 +840,7 @@ b' = ROR32(b xor term1, rot1) + a'
 SHA{one_semantic_policy_wakes_the_entire_ghost_fleet}
 ```
 
-#### 5. Exploit
+#### 5. exploit
 
 전체 익스플로잇 코드는 [GitHub 저장소](https://github.com/GEONWOOHAN/room_escape_ctf/blob/main/blog-exploits/extra-requests/ghost-callback-exploit.py)에서 확인할 수 있습니다.
 ### 2.6 금고가 열린 순간의 영상을 찾아 주세요
@@ -917,7 +915,7 @@ HKDF-SHA256(
 SHA{phantom_frames_survive_optimization}
 ```
 
-#### 4. Exploit
+#### 4. exploit
 
 ```python
 #!/usr/bin/env python3
@@ -1058,7 +1056,7 @@ password: x
 SHA{wh0_ate_the_tuna_at_0404}
 ```
 
-#### 5. Exploit
+#### 5. exploit
 
 ```python
 #!/usr/bin/env python3
@@ -1153,7 +1151,7 @@ Q - known*G = left*G + right*G
 SHA{wh3n_k3ys_v4n1sh_m3m0ry_r3m3mb3rs}
 ```
 
-#### 5. Exploit
+#### 5. exploit
 
 전체 익스플로잇 코드는 [GitHub 저장소](https://github.com/GEONWOOHAN/room_escape_ctf/blob/main/blog-exploits/extra-requests/keypsake-exploit.py)에서 확인할 수 있습니다.
 ### 2.9 나를 쫓아낸 회사의 진짜 복구 기록을 가져오세요
@@ -1218,7 +1216,7 @@ CRC16-CCITT   : 90d2
 SHA{a1b2c3d4e5f6-90d2}
 ```
 
-#### 5. Exploit
+#### 5. exploit
 
 전체 익스플로잇 코드는 [GitHub 저장소](https://github.com/GEONWOOHAN/room_escape_ctf/blob/main/blog-exploits/extra-requests/vault-boundary-exploit.py)에서 확인할 수 있습니다.
 ## 3. 마치며
